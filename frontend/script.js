@@ -1,3 +1,23 @@
+// 🔍 DEBUG - Log all form submissions
+console.log('✅ script.js loaded');
+console.log('🌍 API Base URL:', window.location.origin);
+
+// Intercept all fetch calls
+const originalFetch = window.fetch;
+window.fetch = function(...args) {
+  console.log('📤 [FETCH]', args[0], args[1]);
+  return originalFetch.apply(this, args)
+    .then(response => {
+      console.log('📥 [RESPONSE]', response.status, response.statusText);
+      return response;
+    })
+    .catch(error => {
+      console.error('❌ [FETCH ERROR]', error);
+      throw error;
+    });
+};
+
+
 const API_URL = 'https://backend-gules-three-78.vercel.app';
 
 // Expert Form
