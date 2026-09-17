@@ -5,24 +5,21 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-  origin: ['https://readcatalyst.com', 'https://www.readcatalyst.com', 'http://localhost:3000']
+  origin: ['https://readcatalyst.com', 'http://localhost:3000']
 }));
 app.use(express.json());
 
-// Import from src structure
+app.get('/', (req, res) => {
+  res.json({ message: 'Read Catalyst API is running' });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'Server is running' });
+});
+
+// Import routes
 const expertRoutes = require('../src/routes/expertRoutes');
 const partnerRoutes = require('../src/routes/partnerRoutes');
-
-app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Read Catalyst API',
-    endpoints: {
-      health: '/api/health',
-      expert: '/api/expert/apply',
-      partner: '/api/partner/apply'
-    }
-  });
-});
 
 app.use('/api/expert', expertRoutes);
 app.use('/api/partner', partnerRoutes);
