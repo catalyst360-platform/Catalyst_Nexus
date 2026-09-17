@@ -1,13 +1,8 @@
-// expertController.js - TOP OF FILE
-
 const mailgun = require('mailgun.js');
 const FormData = require('form-data');
 
-// ✅ CORRECT WAY - Initialize inside the function or with proper format
 const mg = new mailgun(FormData);
-
-// Don't initialize client here - do it inside the function
-// This ensures the key is fresh each time
+const domain = process.env.MAILGUN_DOMAIN;
 
 exports.applyAsExpert = async (req, res) => {
   try {
@@ -17,131 +12,71 @@ exports.applyAsExpert = async (req, res) => {
     console.log('📋 [EXPERT APPLY] Request received');
     console.log('🔵 ════════════════════════════════════════\n');
     
-    // Check env variables
-    console.log('🔑 [CONFIG CHECK] Mailgun Environment Variables:');
-    console.log('   ✓ Domain:', process.env.MAILGUN_DOMAIN || '❌ NOT SET');
-    console.log('   ✓ From Email:', process.env.MAILGUN_FROM_EMAIL || '❌ NOT SET');
-    console.log('   ✓ API Key (first 20 chars):', 
-      process.env.MAILGUN_API_KEY ? 
-      process.env.MAILGUN_API_KEY.substring(0, 20) + '...' : 
-      '❌ NOT SET');
-    console.log('   ✓ Admin Email:', process.env.ADMIN_EMAIL || '❌ NOT SET\n');
-
-    // ✅ FIX: Initialize client HERE with proper authentication
-    const client = mg.client({ 
-      username: 'api', 
-      key: process.env.MAILGUN_API_KEY 
-    });
-
-    console.log('✅ [MAILGUN] Client initialized with API key\n');
-
-    // Log incoming request body
-    console.log('📥 [REQUEST DATA] Expert Application Details:');
-    console.log('   Name:', name);
-    console.log('   Email:', email);
-    console.log('   Phone:', phone);
-    console.log('   Expertise:', expertise);
-    console.log('   Experience:', experience, 'years\n');
-
     // Validate required fields
-    if (!email || !name) {
-      console.log('❌ [VALIDATION] Failed: Missing email or name');
+    if (!email || !name || !phone || !expertise || !experience) {
+      console.log('❌ [VALIDATION] Missing required fields');
       return res.status(400).json({ 
         success: false, 
-        error: 'Email and name are required' 
+        error: 'Email, name, phone, expertise, and experience are required'
       });
     }
 
-    if (!process.env.MAILGUN_DOMAIN || !process.env.MAILGUN_API_KEY) {
-      console.log('❌ [CONFIG ERROR] Missing Mailgun configuration');
-      return res.status(500).json({ 
-        success: false, 
-        error: 'Email service not configured' 
-      });
-    }
+    console.log('✅ Validation passed\n');
 
-    console.log('✅ [VALIDATION] All required fields present\n');
-
-    // ===== EMAIL TO USER =====
-    const userEmailData = {
-      from: process.env.MAILGUN_FROM_EMAIL,
+    // Email to expert
+    const expertEmailData = {
+      from: `Read Catalyst <${process.env.MAILGUN_FROM_EMAIL}>`,
       to: email,
-      subject: 'Expert Application Received - Read Catalyst',
+      subject: '✅ Expert Application Received - Read Catalyst',
       html: `
-        <h2>Thank you for applying, ${name}!</h2>
-        <p>We have received your expert application and appreciate your interest in Read Catalyst.</p>
-        <p>Our team will review your profile and get back to you shortly.</p>
-        <br/>
-        <p>Best regards,<br/>Read Catalyst Team</p>
+        <h2>Thank you for applying!</h2>
+        <p>Hi ${name},</p>
+        <p>We've received your expert application. Our team will review it and contact you within 2-3 business days.</p>
+        <p><strong>Application Details:</strong></p>
+        <ul>
+          <li><strong>Expertise:</strong> ${expertise}</li>
+          <li><strong>Experience:</strong> ${experience} years</li>
+        </ul>
+        <p>Best regards,<br>Read Catalyst™ Team</p>
       `
     };
 
-    console.log('📤 [EMAIL 1/2] Sending confirmation email to user:');
-    console.log('   To:', userEmailData.to);
-    console.log('   From:', userEmailData.from);
-    console.log('   Domain:', process.env.MAILGUN_DOMAIN);
-
-    try {
-      const userMsg = await client.messages.create(process.env.MAILGUN_DOMAIN, userEmailData);
-      console.log('✅ [SUCCESS] User email sent');
-      console.log('   Message ID:', userMsg.id, '\n');
-    } catch (emailError) {
-      console.error('❌ [ERROR - USER EMAIL] Failed to send:');
-      console.error('   Status:', emailError.status);
-      console.error('   Details:', emailError.details);
-      console.error('   Full Error:', emailError, '\n');
-      throw emailError;
-    }
-
-    // ===== EMAIL TO ADMIN =====
+    // Email to admin
     const adminEmailData = {
-      from: process.env.MAILGUN_FROM_EMAIL,
+      from: `Read Catalyst <${process.env.MAILGUN_FROM_EMAIL}>`,
       to: process.env.ADMIN_EMAIL,
-      subject: `New Expert Application: ${name}`,
+      subject: `🆕 NEW EXPERT APPLICATION: ${name}`,
       html: `
-        <h2>New Expert Application Received</h2>
+        <h2>New Expert Application</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Expertise:</strong> ${expertise}</p>
         <p><strong>Experience:</strong> ${experience} years</p>
+        <p><strong>Bio:</strong> ${bio || 'N/A'}</p>
+        <p><strong>Website:</strong> ${website || 'N/A'}</p>
+        <p><strong>LinkedIn:</strong> ${linkedin || 'N/A'}</p>
       `
     };
 
-    console.log('📤 [EMAIL 2/2] Sending notification email to admin:');
-    console.log('   To:', adminEmailData.to);
-    console.log('   From:', adminEmailData.from);
+    await mg.messages.create(domain, expertEmailData);
+    console.log(`✅ Expert confirmation sent to ${email}`);
 
-    try {
-      const adminMsg = await client.messages.create(process.env.MAILGUN_DOMAIN, adminEmailData);
-      console.log('✅ [SUCCESS] Admin email sent');
-      console.log('   Message ID:', adminMsg.id, '\n');
-    } catch (emailError) {
-      console.error('❌ [ERROR - ADMIN EMAIL] Failed to send:');
-      console.error('   Status:', emailError.status);
-      console.error('   Details:', emailError.details, '\n');
-      throw emailError;
-    }
+    await mg.messages.create(domain, adminEmailData);
+    console.log(`✅ Admin notification sent\n`);
 
-    // ===== SUCCESS RESPONSE =====
-    console.log('🟢 ════════════════════════════════════════');
-    console.log('✅ [SUCCESS] Both emails sent successfully');
-    console.log('🟢 ════════════════════════════════════════\n');
-
-    res.status(200).json({ 
+    res.json({ 
       success: true, 
-      message: 'Application submitted successfully',
-      data: { name, email }
+      message: 'Application submitted successfully! Check your email for confirmation.' 
     });
 
   } catch (error) {
-    console.error('\n🔴 ════════════════════════════════════════');
-    console.error('❌ [CRITICAL ERROR]', error.message);
-    console.error('🔴 ════════════════════════════════════════\n');
-
+    console.error('❌ Expert form error:', error.message);
     res.status(500).json({ 
       success: false, 
-      error: error.message
+      message: 'Server error: ' + error.message
     });
   }
 };
+
+module.exports = { applyAsExpert };
