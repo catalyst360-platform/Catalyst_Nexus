@@ -1,23 +1,35 @@
 {
   "version": 2,
-  "buildCommand": "echo 'Frontend only - no build needed'",
-  "outputDirectory": ".",
   "routes": [
     {
       "src": "/styles.css",
-      "dest": "/styles.css"
+      "dest": "/styles.css",
+      "headers": {
+        "cache-control": "public, max-age=3600"
+      }
     },
     {
       "src": "/script.js",
-      "dest": "/script.js"
+      "dest": "/script.js",
+      "headers": {
+        "cache-control": "public, max-age=3600"
+      }
+    },
+    {
+      "src": "/(.*)\\.css",
+      "dest": "/$1.css"
+    },
+    {
+      "src": "/(.*)\\.js",
+      "dest": "/$1.js"
     },
     {
       "src": "/(.*)\\.html",
       "dest": "/$1.html"
     },
     {
-      "src": "/",
-      "dest": "/index.html"
+      "src": "/(.*)\\.(png|jpg|jpeg|gif|svg|ico|webp)",
+      "dest": "/$1.$2"
     },
     {
       "src": "/(.*)",
