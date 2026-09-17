@@ -4,114 +4,83 @@
 
 // 1️⃣ EXPERT FORM HANDLER
 // ============================================
-// At the top of the file
-const API_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:5000' 
-  : 'https://api.readcatalyst.com';  // ✅ Your Vercel URL
-
-// Then in your expert form handler:
-const response = await fetch(`${API_URL}/api/expert/apply`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(data)
-});
-
-// And in your partner form handler:
-const response = await fetch(`${API_URL}/api/partner/apply`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(data)
-});
-
+// For Expert Form
 const expertForm = document.getElementById('expertForm');
-const expertStatusMessage = document.getElementById('statusMessage');
-
 if (expertForm) {
-    expertForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            expertise: document.getElementById('expertise').value,
-            experience: document.getElementById('experience').value,
-            bio: document.getElementById('bio').value,
-            website: document.getElementById('website').value,
-            linkedin: document.getElementById('linkedin').value
-        };
-        
-        expertStatusMessage.textContent = '📤 Submitting...';
-        expertStatusMessage.style.color = 'blue';
-        
-        try {
-            const response = await fetch('http://localhost:5000/api/expert/apply', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                expertStatusMessage.textContent = '✅ Application submitted successfully! Check your email for confirmation.';
-                expertStatusMessage.style.color = 'green';
-                expertStatusMessage.style.fontSize = '16px';
-                expertStatusMessage.style.fontWeight = 'bold';
-                expertForm.reset();
-            } else {
-                expertStatusMessage.textContent = '❌ ' + (data.message || 'Submission failed. Please try again.');
-                expertStatusMessage.style.color = 'red';
-            }
-        } catch (error) {
-            console.error('Expert form error:', error);
-            expertStatusMessage.textContent = '❌ Network error. Please check your connection and try again.';
-            expertStatusMessage.style.color = 'red';
-        }
-    });
+  expertForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      expertise: document.getElementById('expertise').value,
+      experience: document.getElementById('experience').value,
+      bio: document.getElementById('bio').value,
+      website: document.getElementById('website').value,
+      linkedin: document.getElementById('linkedin').value
+    };
+
+    try {
+      const response = await fetch('/api/expert/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+      const statusMessage = document.getElementById('statusMessage');
+      
+      if (data.success) {
+        statusMessage.innerHTML = '✅ ' + data.message;
+        expertForm.reset();
+      } else {
+        statusMessage.innerHTML = '❌ ' + data.error;
+      }
+    } catch (error) {
+      document.getElementById('statusMessage').innerHTML = '❌ Error: ' + error.message;
+    }
+  });
 }
 
-// ============================================
-// PARTNER FORM HANDLER
-// ============================================
-// ==================== PARTNER FORM HANDLER ====================
+// For Partner Form
 const partnerForm = document.getElementById('partnerForm');
-const partnerStatus = document.getElementById('statusMessage');
-
 if (partnerForm) {
-    partnerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        partnerStatus.textContent = 'Submitting...';
-        partnerStatus.style.color = '#666';
-        
-        const formData = new FormData(partnerForm);
-        const data = Object.fromEntries(formData);
-        data.partnerConsent = partnerForm.querySelector('#partnerConsent').checked;
+  partnerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+      institutionName: document.getElementById('institutionName').value,
+      contactFirstName: document.getElementById('contactFirstName').value,
+      contactLastName: document.getElementById('contactLastName').value,
+      contactEmail: document.getElementById('contactEmail').value,
+      contactPhone: document.getElementById('contactPhone').value,
+      location: document.getElementById('location').value,
+      students: document.getElementById('students').value,
+      programs: document.getElementById('programs').value,
+      affiliationCode: document.getElementById('affiliationCode').value
+    };
 
-        try {
-            const response = await fetch('http://localhost:5000/api/partner/apply', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
+    try {
+      const response = await fetch('/api/partner/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
 
-            const result = await response.json();
-
-            if (result.success) {
-                partnerStatus.textContent = '✅ Partnership Inquiry Submitted Successfully! Check your email for confirmation.';
-                partnerStatus.style.color = '#22c55e';
-                partnerForm.reset();
-            } else {
-                partnerStatus.textContent = '❌ ' + result.message;
-                partnerStatus.style.color = '#ef4444';
-            }
-        } catch (error) {
-            console.error('Partner form error:', error);
-            partnerStatus.textContent = '❌ Server error. Please try again.';
-            partnerStatus.style.color = '#ef4444';
-        }
-    });
+      const data = await response.json();
+      const statusMessage = document.getElementById('statusMessage');
+      
+      if (data.success) {
+        statusMessage.innerHTML = '✅ ' + data.message;
+        partnerForm.reset();
+      } else {
+        statusMessage.innerHTML = '❌ ' + data.error;
+      }
+    } catch (error) {
+      document.getElementById('statusMessage').innerHTML = '❌ Error: ' + error.message;
+    }
+  });
 }
 
 
