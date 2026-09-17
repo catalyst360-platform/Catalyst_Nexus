@@ -1,19 +1,10 @@
 {
   "version": 2,
+  "public": true,
   "routes": [
     {
-      "src": "/styles.css",
-      "dest": "/styles.css",
-      "headers": {
-        "cache-control": "public, max-age=3600"
-      }
-    },
-    {
-      "src": "/script.js",
-      "dest": "/script.js",
-      "headers": {
-        "cache-control": "public, max-age=3600"
-      }
+      "src": "/(.*)\\.html",
+      "dest": "/$1.html"
     },
     {
       "src": "/(.*)\\.css",
@@ -24,15 +15,11 @@
       "dest": "/$1.js"
     },
     {
-      "src": "/(.*)\\.html",
-      "dest": "/$1.html"
+      "src": "/(.*)\\.json",
+      "dest": "/$1.json"
     },
     {
-      "src": "/(.*)\\.(png|jpg|jpeg|gif|svg|ico|webp)",
-      "dest": "/$1.$2"
-    },
-    {
-      "src": "/(.*)",
+      "src": "/",
       "dest": "/index.html"
     }
   ]
