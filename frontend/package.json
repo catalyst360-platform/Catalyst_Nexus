@@ -1,0 +1,13 @@
+cd frontend
+cat > package.json << 'EOF'
+{
+  "name": "catalyst-frontend",
+  "version": "1.0.0",
+  "description": "Read Catalyst Frontend",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'"
+  }
+}
+EOF
