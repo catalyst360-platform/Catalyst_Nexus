@@ -1,0 +1,13 @@
+POST http://localhost:5000/api/expert/apply
+Content-Type: application/json
+
+{
+  "name": "Mohamed Nazar",
+  "email": "mmohamed.nazar@gmail.com",
+  "phone": "+1234567890",
+  "expertise": "JavaScript, Node.js",
+  "experience": "5",
+  "bio": "Senior developer with 5 years of experience",
+  "website": "https://readcatalyst.com",
+  "linkedIn": "https://linkedin.com/in/mohamednazar"
+}
