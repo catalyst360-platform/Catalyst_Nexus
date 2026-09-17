@@ -13,8 +13,15 @@ app.use(express.json());
 const expertRoutes = require('../src/routes/expertRoutes');
 const partnerRoutes = require('../src/routes/partnerRoutes');
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running' });
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Read Catalyst API',
+    endpoints: {
+      health: '/api/health',
+      expert: '/api/expert/apply',
+      partner: '/api/partner/apply'
+    }
+  });
 });
 
 app.use('/api/expert', expertRoutes);
