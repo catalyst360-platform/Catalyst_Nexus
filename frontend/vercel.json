@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "frontend/index.html",
+      "src": "frontend/INDEX.html",
       "use": "@vercel/static"
     },
     {
@@ -15,7 +15,7 @@
     }
   ],
   "routes": [
-    { "src": "/", "dest": "frontend/index.html" },
+    { "src": "/", "dest": "frontend/INDEX.html" },
     { "src": "/about", "dest": "frontend/ABOUT.html" },
     { "src": "/apply-expert", "dest": "frontend/APPLY-EXPERT.html" },
     { "src": "/apply-partner", "dest": "frontend/APPLY-PARTNER.html" },
