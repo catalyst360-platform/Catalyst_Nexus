@@ -2,6 +2,24 @@
 console.log('✅ script.js loaded');
 console.log('🌍 API Base URL:', window.location.origin);
 
+
+
+console.log("script.js is running");
+
+// Check if CSS is loaded
+const cssLoaded = [...document.styleSheets].some(sheet => sheet.href && sheet.href.includes("styles.css"));
+console.log("CSS loaded:", cssLoaded);
+
+// Check if header exists
+const header = document.querySelector("header");
+console.log("Header element found:", !!header);
+
+// Catch errors globally
+window.addEventListener("error", (event) => {
+  console.error("Global error:", event.message, "at", event.filename, ":", event.lineno);
+});
+
+
 // Intercept all fetch calls
 const originalFetch = window.fetch;
 window.fetch = function(...args) {
