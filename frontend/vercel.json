@@ -1,26 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "frontend/INDEX.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "frontend/**/*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "frontend/**/*",
-      "use": "@vercel/static"
-    }
-  ],
   "routes": [
-    { "src": "/", "dest": "frontend/INDEX.html" },
-    { "src": "/about", "dest": "frontend/ABOUT.html" },
-    { "src": "/apply-expert", "dest": "frontend/APPLY-EXPERT.html" },
-    { "src": "/apply-partner", "dest": "frontend/APPLY-PARTNER.html" },
-    { "src": "/catalyst-nexus", "dest": "frontend/CATALYST-NEXUS.html" },
-    { "src": "/contact", "dest": "frontend/Contact.html" },
-    { "src": "/get-involved", "dest": "frontend/GET-INVOLVED.html" }
+    { "src": "/", "dest": "INDEX.html" }
+  ],
+  "builds": [
+    { "src": "INDEX.html", "use": "@vercel/static" },
+    { "src": "**/*", "use": "@vercel/static" }
   ]
 }
