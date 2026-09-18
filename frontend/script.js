@@ -20,6 +20,49 @@ window.addEventListener("error", (event) => {
 });
 
 
+// 🔍 SEND LOGS TO BACKEND
+function sendLogToServer(level, message, data = null) {
+  const logData = {
+    level,
+    message,
+    data,
+    timestamp: new Date().toISOString(),
+    url: window.location.href,
+    userAgent: navigator.userAgent
+  };
+
+  // Send to backend
+  fetch('/api/logs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(logData)
+  }).catch(err => console.error('Failed to send log:', err));
+}
+
+// Override console methods
+const originalLog = console.log;
+const originalError = console.error;
+const originalWarn = console.warn;
+
+console.log = function(...args) {
+  originalLog(...args);
+  sendLogToServer('INFO', args.join(' '));
+};
+
+console.error = function(...args) {
+  originalError(...args);
+  sendLogToServer('ERROR', args.join(' '));
+};
+
+console.warn = function(...args) {
+  originalWarn(...args);
+  sendLogToServer('WARN', args.join(' '));
+};
+
+// Log page load
+console.log('✅ Frontend loaded from', window.location.href);
+
+
 // Intercept all fetch calls
 const originalFetch = window.fetch;
 window.fetch = function(...args) {
