@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join as Expert - Read Catalyst™</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='20' font-size='20'>•••</text></svg>">
+
+    <link rel="stylesheet" href="/site/styles.css">
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="read">read</span>
+                <span class="catalyst">Catalyst</span>
+                <span class="dots">•••</span>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="catalyst-nexus.html">Catalyst Nexus™</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+                <a href="apply-expert.html" class="nav-cta">Join Network</a>
+            </nav>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <button class="theme-toggle" title="Toggle dark mode">🌙</button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Join as <span>Expert/Consultant</span></h1>
+            <p>Bring your expertise to transform engineering colleges across India</p>
+        </div>
+    </section>
+
+    <!-- ==================== APPLICATION FORM ==================== -->
+    <section class="section">
+        <div class="form-container">
+            <h2 style="margin-bottom: 0.5rem; text-align: center;">Expert Application Form</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Fill out the form below to apply as an expert in our network</p>
+
+            <form id="expertForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210">
+                </div>
+
+                <div class="form-group">
+                    <label for="expertise">Area of Expertise *</label>
+                    <input type="text" id="expertise" name="expertise" required placeholder="e.g., Software Development, AI/ML, Cloud Computing">
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Years of Experience *</label>
+                    <input type="number" id="experience" name="experience" min="0" max="60" required placeholder="e.g., 5">
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Professional Bio</label>
+                    <textarea id="bio" name="bio" rows="4" placeholder="Tell us about your professional background and expertise..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website/Portfolio</label>
+                    <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn Profile</label>
+                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit Application</button>
+                <p id="statusMessage"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Read Catalyst™</h3>
+                <p>Transforming institutions through industry insights</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p>Email: admin@readcatalyst.com</p>
+                <p>© 2024 Read Catalyst™. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/site/script.js"></script>
+</body>
+</html>

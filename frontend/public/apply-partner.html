@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner as Institution - Read Catalyst™</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='20' font-size='20'>•••</text></svg>">
+
+    <link rel="stylesheet" href="/site/styles.css">
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="read">read</span>
+                <span class="catalyst">Catalyst</span>
+                <span class="dots">•••</span>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="catalyst-nexus.html">Catalyst Nexus™</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+                <a href="apply-expert.html" class="nav-cta">Join Network</a>
+            </nav>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <button class="theme-toggle" title="Toggle dark mode">🌙</button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Partner as <span>Institution</span></h1>
+            <p>Transform your college into an industry-ready excellence hub</p>
+        </div>
+    </section>
+
+    <!-- ==================== APPLICATION FORM ==================== -->
+    <section class="section">
+        <div class="form-container">
+            <h2 style="margin-bottom: 0.5rem; text-align: center;">Institution Partnership Inquiry</h2>
+            <p style="text-align: center; color: var(--neutral-gray); margin-bottom: 2rem;">Tell us about your transformation aspirations</p>
+
+            <form id="partnerForm">
+                <!-- Institution Information -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary-red);">Institution Details</h3>
+                    
+                    <div class="form-group">
+                        <label for="institutionName">Institution Name *</label>
+                        <input type="text" id="institutionName" name="institutionName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="institutionType">Type of Institution *</label>
+                        <select id="institutionType" name="institutionType" required>
+                            <option value="">-- Select --</option>
+                            <option value="government">Government College</option>
+                            <option value="private">Private College</option>
+                            <option value="deemed">Deemed University</option>
+                            <option value="autonomous">Autonomous College</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location (City) *</label>
+                        <input type="text" id="location" name="location" required>
+                    </div>
+
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="students">Number of Students *</label>
+                            <input type="number" id="students" name="students" min="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="programs">Number of Programs *</label>
+                            <input type="number" id="programs" name="programs" min="1" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary-red);">Point of Contact</h3>
+                    
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="contactFirstName">First Name *</label>
+                            <input type="text" id="contactFirstName" name="contactFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactLastName">Last Name *</label>
+                            <input type="text" id="contactLastName" name="contactLastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactRole">Role/Designation *</label>
+                        <input type="text" id="contactRole" name="contactRole" placeholder="e.g., Principal, Dean of Academics" required>
+                    </div>
+
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="contactEmail">Email *</label>
+                            <input type="email" id="contactEmail" name="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Phone *</label>
+                            <input type="tel" id="contactPhone" name="contactPhone" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transformation Needs -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary-red);">Transformation Needs</h3>
+                    
+                    <div class="form-group">
+                        <label for="challenges">Key challenges you're facing *</label>
+                        <textarea id="challenges" name="challenges" rows="4" placeholder="Describe your main institutional challenges..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aspirations">What does institutional excellence look like for you? *</label>
+                        <textarea id="aspirations" name="aspirations" rows="4" placeholder="Share your vision for transformation..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- Timeline & Budget -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary-red);">Planning Horizon</h3>
+                    
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="timeline">Transformation timeline *</label>
+                            <select id="timeline" name="timeline" required>
+                                <option value="">-- Select --</option>
+                                <option value="immediate">Immediate (0-3 months)</option>
+                                <option value="short-term">Short-term (3-6 months)</option>
+                                <option value="medium-term">Medium-term (6-12 months)</option>
+                                <option value="long-term">Long-term (12+ months)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Budget range (INR) *</label>
+                            <select id="budget" name="budget" required>
+                                <option value="">-- Select --</option>
+                                <option value="under-10l">Under ₹10 Lac</option>
+                                <option value="10l-25l">₹10 Lac - ₹25 Lac</option>
+                                <option value="25l-50l">₹25 Lac - ₹50 Lac</option>
+                                <option value="50l-1cr">₹50 Lac - ₹1 Crore</option>
+                                <option value="above-1cr">Above ₹1 Crore</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consent Checkbox -->
+                <div class="form-group" style="margin-top: 2rem; display: flex; align-items: center;">
+                    <input type="checkbox" id="partnerConsent" name="partnerConsent" style="margin-right: 10px; width: auto;">
+                    <label for="partnerConsent" style="margin: 0; font-size: 0.95rem;">I agree to be contacted by Read Catalyst™ for partnership discussions and transformation opportunities</label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">Submit Inquiry</button>
+<p id="statusMessage" style="margin-top: 1rem; text-align: center; font-weight: bold;"></p>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>About Read Catalyst</h4>
+                    <a href="about.html">What We Do</a>
+                    <a href="about.html#mission">Mission & Vision</a>
+                    <a href="#">Our Team</a>
+                    <a href="#">The Founder</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Catalyst Nexus™</h4>
+                    <a href="catalyst-nexus.html">Framework Overview</a>
+                    <a href="catalyst-nexus.html#how">How It Works</a>
+                    <a href="catalyst-nexus.html#partners">Partner Ecosystem</a>
+                    <a href="#">Success Stories</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Get Involved</h4>
+                    <a href="apply-expert.html">Join Our Network</a>
+                    <a href="apply-partner.html">Partner as Institution</a>
+                    <a href="#">Apply for Fellowship</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect With Us</h4>
+                    <div class="contact-info">
+                        📧 partnerships@readcatalyst.com<br>
+                        📞 +91 7829446483<br>
+                        🌐 readcatalyst.com
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn">in</a>
+                        <a href="#" title="Twitter">𝕏</a>
+                        <a href="#" title="Facebook">f</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Read Catalyst™. All rights reserved. | <a href="#">Privacy</a> | <a href="#">Terms</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== ACKNOWLEDGEMENT MODAL ==================== -->
+    <div id="acknowledgementModal" class="acknowledgement-modal">
+        <div class="acknowledgement-content">
+            <div class="acknowledgement-header">
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="acknowledgement-body">
+                <div id="acknowledgementIcon" class="acknowledgement-icon">✅</div>
+                <h2 id="acknowledgementTitle">Success!</h2>
+                <p id="acknowledgementMessage">Your inquiry has been submitted successfully.</p>
+                <div id="acknowledgementDetails" class="acknowledgement-details"></div>
+                <button class="btn btn-primary" onclick="closeAcknowledgement()">Got It, Thanks!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/site/script.js"></script>
+</body>
+</html>
